@@ -6,11 +6,13 @@ import NavContent from "./nav-content";
 const DrawerNav = () => {
   return (
     <Drawer direction="left">
-      <DrawerTrigger>
+      <DrawerTrigger className="lg:hidden">
         <Columns2 />
       </DrawerTrigger>
       <DrawerContent>
-        <NavContent />
+        <aside className="h-full w-[200px] p-5">
+          <NavContent />
+        </aside>
       </DrawerContent>
     </Drawer>
   );

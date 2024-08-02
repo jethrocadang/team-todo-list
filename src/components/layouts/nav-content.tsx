@@ -12,7 +12,6 @@ import { workspaceLinks, teamLinks, dummyTeams } from "./links";
 
 const NavContent = () => {
   return (
-    <aside className="h-full w-[200px] p-5">
       <div className="flex flex-col gap-5 text-xs font-normal tracking-normal text-primary">
         <Link href={"#"}>Workspace</Link>
         <Link href={"#"} className="rounded-sm p-1.5">
@@ -76,7 +75,6 @@ const NavContent = () => {
           </Accordion>
         </div>
       </div>
-    </aside>
   );
 };
 
