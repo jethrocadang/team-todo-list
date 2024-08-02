@@ -1,12 +1,10 @@
+import Container from "@/components/container";
+import DrawerNav from "@/components/layouts/drawer-nav";
 
-
-export default function Workspace () {
+export default function Workspace() {
   return (
-    <div>
-        <div>
-            Workspace Page
-        </div>
-    </div>
-  )
+    <Container>
+      <DrawerNav />
+    </Container>
+  );
 }
-

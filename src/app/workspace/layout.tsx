@@ -6,9 +6,9 @@ export default function WorkspaceLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="flex h-full">
+    <main className="flex h-full w-full">
       <SideBar />
-      <div>{children}</div>
+      <div className="w-full p-2.5">{children}</div>
     </main>
   );
 }
