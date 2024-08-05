@@ -17,13 +17,13 @@ const HeaderNav = ({ title, rightContent, leftContent }: HeaderNavProps) => {
         <div className="flex items-center justify-between p-2.5">
           <div className="flex items-center">
             <DrawerNav />
-            <p className="text-xs font-semibold tracking-wide text-muted-foreground">
+            <p className="text-xs font-medium tracking-wide text-muted-foreground">
               {title}
             </p>
           </div>
           {leftContent && <div className="md:hidden">{leftContent}</div>}
         </div>
-        <div className="space-x-2.5 border-t border-border p-2.5 md:border-none">
+        <div className="flex items-center space-x-2.5 border-t border-border p-2.5 md:border-none">
           {rightContent}
         </div>
       </div>
