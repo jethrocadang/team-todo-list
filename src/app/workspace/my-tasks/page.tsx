@@ -9,7 +9,7 @@ export default function MyTasksPage() {
       <Headernav
         title="My tasks"
         leftContent={
-          <PanelRightOpen className="mr-2 inline-flex h-4 w-4 text-primary/70" />
+          <PanelRightOpen className="mr-2 inline-flex h-5 w-5 text-primary/70" />
         }
         rightContent={
           <>
