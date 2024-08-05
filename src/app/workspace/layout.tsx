@@ -8,7 +8,7 @@ export default function WorkspaceLayout({
   return (
     <main className="flex h-full w-full">
       <SideBar />
-      <div className="w-full p-2.5">{children}</div>
+      <div className="w-full lg:p-2.5">{children}</div>
     </main>
   );
 }
