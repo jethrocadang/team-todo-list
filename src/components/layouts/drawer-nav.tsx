@@ -1,20 +1,25 @@
 import { Columns2 } from "lucide-react";
-import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 
 import NavContent from "./nav-content";
 
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 const DrawerNav = () => {
   return (
-    <Drawer direction="left">
-      <DrawerTrigger className="lg:hidden">
+    <Sheet>
+      <SheetTrigger className="lg:hidden">
         <Columns2 />
-      </DrawerTrigger>
-      <DrawerContent>
+      </SheetTrigger>
+      <SheetContent side={"left"}>
         <aside className="h-full w-[200px] p-5">
           <NavContent />
         </aside>
-      </DrawerContent>
-    </Drawer>
+      </SheetContent>
+    </Sheet>
   );
 };
 
