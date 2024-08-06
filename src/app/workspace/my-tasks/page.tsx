@@ -1,5 +1,6 @@
 import Container from "@/components/container";
 import Headernav from "@/components/layouts/top-nav";
+import TaskBar from "@/components/task";
 import { Button } from "@/components/ui/button";
 import { PanelRightOpen } from "lucide-react";
 
@@ -19,6 +20,7 @@ export default function MyTasksPage() {
           </>
         }
       />
+      <TaskBar/>
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { TextSm } from "../text";
+import { Text } from "../text";
 import { Button } from "../ui/button";
 import DrawerNav from "./drawer-nav";
 import { ListFilter } from "lucide-react";
@@ -19,7 +19,7 @@ const HeaderNav = ({ title, rightContent, leftContent }: HeaderNavProps) => {
           <div className="flex items-center justify-between p-2.5">
             <div className="flex items-center">
               <DrawerNav />
-              <TextSm type={"md"}>{title}</TextSm>
+              <Text type={"md"}>{title}</Text>
             </div>
             {leftContent && <div className="md:hidden">{leftContent}</div>}
           </div>
@@ -31,7 +31,7 @@ const HeaderNav = ({ title, rightContent, leftContent }: HeaderNavProps) => {
       </div>
       <div className="border-b border-border p-2.5 flex items-center">
         <ListFilter className="mr-2 inline-flex h-5 w-5 text-primary/70" />
-        <TextSm>Filter</TextSm>
+        <Text>Filter</Text>
       </div>
     </>
   );
