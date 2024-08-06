@@ -1,21 +1,34 @@
 "use client";
 
 import { Text } from "../text";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "../ui/breadcrumb";
 import DrawerNav from "./drawer-nav";
 import { ListFilter } from "lucide-react";
 
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
 interface HeaderNavProps {
-  title?: string;
   rightContent?: React.ReactNode;
   leftContent?: React.ReactNode;
   showFilter?: boolean;
+  breadcrumb?: BreadcrumbItem[];
 }
 
 const HeaderNav = ({
-  title,
   rightContent,
   leftContent,
   showFilter = true,
+  breadcrumb = [],
 }: HeaderNavProps) => {
   return (
     <>
@@ -24,7 +37,27 @@ const HeaderNav = ({
           <div className="flex items-center justify-between p-2.5">
             <div className="flex items-center">
               <DrawerNav />
-              <Text type={"md"}>{title}</Text>
+              {/**Breadcrumb */}
+              <Breadcrumb>
+                <BreadcrumbList>
+                {breadcrumb.map((item, index) => (
+                    <div key={index} className="flex items-center">
+                      <BreadcrumbItem>
+                        {item.href ? (
+                          <BreadcrumbLink href={item.href}>
+                            {item.label}
+                          </BreadcrumbLink>
+                        ) : (
+                          <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                        )}
+                      </BreadcrumbItem>
+                      {index < breadcrumb.length - 1 && (
+                        <BreadcrumbSeparator />
+                      )}
+                    </div>
+                  ))}
+                </BreadcrumbList>
+              </Breadcrumb>
             </div>
             {leftContent && <div className="md:hidden">{leftContent}</div>}
           </div>
