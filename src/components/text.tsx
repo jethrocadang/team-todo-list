@@ -6,12 +6,16 @@ import { cva, VariantProps } from "class-variance-authority";
 const textVariants = cva("text-xs font-normal text-primary", {
   variants: {
     size: {
-      default: "text-xs",
+      xs: "text-xs",
       sm: "text-sm",
+      md: "text-md",
+      h1: "text-2xl tracking-wide"
+
     },
     type: {
-      default: "font-normal",
+      normal: "font-normal",
       md: "font-medium",
+      bold: "font-bold"
     },
     color: {
       default: "text-primary",
@@ -19,8 +23,8 @@ const textVariants = cva("text-xs font-normal text-primary", {
     },
   },
   defaultVariants: {
-    size: "default",
-    type: "default",
+    size: "xs",
+    type: "normal",
     color: "default",
   },
 });
