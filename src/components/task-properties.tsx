@@ -14,14 +14,10 @@ import {
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import TaskPropsSelect from "./task-props-select";
+import { selectPriorityItems, selectStatusItems } from "@/lib/task-properties";
 
 const TaskProperties = () => {
-  const statusItems = [
-    { icon: Loader, value: "Backlog" },
-    { icon: Circle, value: "Todo" },
-    { icon: Clock, value: "In progress" },
-    { icon: CircleCheckBig, value: "Done" },
-  ];
+
 
   return (
     <aside className="hidden w-full max-w-56 flex-shrink flex-col justify-start gap-6 border-l px-2.5 md:flex">
@@ -38,7 +34,27 @@ const TaskProperties = () => {
               Backlog
             </div>
           }
-          selectItems={statusItems}
+          selectItems={selectStatusItems}
+          label="Change status"
+        />
+        <TaskPropsSelect
+          placeholder={
+            <div className="flex items-center gap-2">
+              <Minus className="h-4 w-4" />
+              Set priority
+            </div>
+          }
+          selectItems={selectPriorityItems}
+          label="Set priority"
+        />
+        <TaskPropsSelect
+          placeholder={
+            <div className="flex items-center gap-2">
+              <CircleUserRound className="h-4 w-4" />
+              Assign
+            </div>
+          }
+          label="Assign to"
         />
       </div>
       <div>
