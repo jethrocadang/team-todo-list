@@ -26,3 +26,12 @@ export   const selectPriorityItems = [
     { icon: CircleMinus, value: "Medium" },
     { icon: CircleArrowDown, value: "Low" },
   ];
+
+
+export   const frameworksList = [
+  { value: "react", label: "React" },
+  { value: "angular", label: "Angular" },
+  { value: "vue", label: "Vue" },
+  { value: "svelte", label: "Svelte" },
+  { value: "ember", label: "Ember" },
+];
