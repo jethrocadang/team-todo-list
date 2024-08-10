@@ -14,7 +14,7 @@ import { MultiSelect } from "./label-multi-select";
 import { useState } from "react";
 
 const TaskProperties = () => {
-  const isLabelAvailable = true;
+  const isLabelAvailable = false;
   const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([
     "react",
     "angular",
@@ -32,7 +32,7 @@ const TaskProperties = () => {
           placeholder={
             <div className="flex items-center gap-2">
               <Loader className="h-4 w-4 text-primary/70" />
-              <Text size={"sm"} >Backlog</Text>
+              <Text size={"sm"} type={"md"}>Backlog</Text>
             </div>
           }
           selectItems={selectStatusItems}
@@ -42,7 +42,7 @@ const TaskProperties = () => {
           placeholder={
             <div className="flex items-center gap-2">
               <Minus className="h-4 w-4 text-primary/70" />
-              <Text size={"sm"} >Set priority</Text>
+              <Text size={"sm"} type={"md"} color={"muted"}>Set priority</Text>
             </div>
           }
           selectItems={selectPriorityItems}
@@ -52,7 +52,7 @@ const TaskProperties = () => {
           placeholder={
             <div className="flex items-center gap-2">
               <CircleUserRound className="h-4 w-4 text-primary/70" />
-              <Text size={"sm"} >Assign</Text>
+              <Text size={"sm"} type={"md"} color={"muted"}>Assign</Text>
             </div>
           }
           label="Assign to"
@@ -62,37 +62,35 @@ const TaskProperties = () => {
         <Text type={"md"} color={"muted"}>
           Labels
         </Text>
-        <div className="flex flex-shrink flex-wrap items-center gap-1.5 px-2.5 pt-2.5">
-          {isLabelAvailable ? (
-            <>
-              <Badge variant={"outline"} className="gap-1.5 py-1">
-                <div className="h-2 w-2 rounded-full bg-green-500" /> Bug
-              </Badge>
-              <Badge variant={"outline"} className="gap-1.5 py-1">
-                <div className="h-2 w-2 rounded-full bg-green-500" /> Very Long
-                text
-              </Badge>
-              <Badge variant={"outline"} className="gap-1.5 py-1">
-                <div className="h-2 w-2 rounded-full bg-green-500" /> Very Long
-                text
-              </Badge>
+        {isLabelAvailable ? (
+          <div className="flex flex-shrink flex-wrap items-center gap-1.5 px-2.5 pt-2.5">
+            <Badge variant={"outline"} className="gap-1.5 py-1">
+              <div className="h-2 w-2 rounded-full bg-green-500" /> Bug
+            </Badge>
+            <Badge variant={"outline"} className="gap-1.5 py-1">
+              <div className="h-2 w-2 rounded-full bg-green-500" /> Very Long
+              text
+            </Badge>
+            <Badge variant={"outline"} className="gap-1.5 py-1">
+              <div className="h-2 w-2 rounded-full bg-green-500" /> Very Long
+              text
+            </Badge>
 
-              <Button variant={"ghost"} size={"icon"} className="h-6 w-6">
-                <Plus className="h-4 w-4 text-primary/70" />
-              </Button>
-            </>
-          ) : (
-            <MultiSelect
-              options={frameworksList}
-              onValueChange={setSelectedFrameworks}
-              defaultValue={selectedFrameworks}
-              placeholder="Add tag"
-              variant="inverted"
-              animation={2}
-              maxCount={3}
-            />
-          )}
-        </div>
+            <Button variant={"ghost"} size={"icon"} className="h-6 w-6">
+              <Plus className="h-4 w-4 text-primary/70" />
+            </Button>
+          </div>
+        ) : (
+          <MultiSelect
+            options={frameworksList}
+            onValueChange={setSelectedFrameworks}
+            defaultValue={selectedFrameworks}
+            placeholder="Add tag"
+            variant="inverted"
+            animation={2}
+            maxCount={3}
+          />
+        )}
       </div>
       <div>
         <Text size={"xs"} type={"md"} color={"muted"}>

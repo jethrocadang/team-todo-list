@@ -21,6 +21,8 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { Checkbox } from "./ui/checkbox";
+import { Text } from "./text";
+import useMediaQuery from "@/hooks/use-media-query";
 
 /**
  * Variants for the multi-select component to handle different styles.
@@ -168,6 +170,8 @@ export const MultiSelect = React.forwardRef<
       setIsPopoverOpen((prev) => !prev);
     };
 
+    const isDesktop = useMediaQuery("(min-width: 768px)");
+
     return (
       <Popover
         open={isPopoverOpen}
@@ -179,12 +183,16 @@ export const MultiSelect = React.forwardRef<
             ref={ref}
             {...props}
             onClick={handleTogglePopover}
-            size={"sm"}
-            variant={"ghost"}
+            size={isDesktop ? "sm" : "icon"}
+            variant={isDesktop ? "ghost" : "outline"}
             className="h-8 w-full justify-start"
           >
             <Bookmark className="mr-2 h-4 w-4 text-primary/70" />
-            {placeholder}
+            <span className="hidden md:inline-block">
+              <Text size={"sm"} type={"md"} color={"muted"}>
+                {placeholder}
+              </Text>
+            </span>
           </Button>
         </PopoverTrigger>
         <PopoverContent
