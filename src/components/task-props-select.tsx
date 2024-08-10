@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import useMediaQuery from "@/hooks/use-media-query";
 
 interface SelectItemProps {
   icon: FC<LucideProps>;
@@ -22,7 +23,15 @@ interface SelectItemProps {
 
 interface TaskPropsSelectProps {
   placeholder?: React.ReactNode;
+  variant?:
+    | "link"
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost";
   selectItems?: SelectItemProps[];
+  size?: "default" | "xs" | "sm" | "lg" | "icon" | null | undefined;
   contentTitle?: string;
   label?: string;
 }
@@ -31,16 +40,24 @@ const TaskPropsSelect = ({
   placeholder,
   selectItems,
   label,
+  variant,
+  size,
 }: TaskPropsSelectProps) => {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
   return (
     <Select>
-      <SelectTrigger className="data-[state=open]:bg-accent">
+      <SelectTrigger
+        className="data-[state=open]:bg-accent"
+        variant={variant}
+        size={size}
+      >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent side="left">
+      <SelectContent side={isDesktop ? "left" : "bottom"}>
         <SelectGroup>
           <SelectLabel>{label}</SelectLabel>
-          <SelectSeparator/>
+          <SelectSeparator />
           {selectItems?.map((item, index) => (
             <>
               <SelectItem key={index} value={item.value}>

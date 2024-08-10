@@ -21,6 +21,7 @@ interface HeaderNavProps {
   rightContent?: React.ReactNode;
   leftContent?: React.ReactNode;
   showFilter?: boolean;
+  showRightContent?: boolean;
   breadcrumb?: BreadcrumbItem[];
 }
 
@@ -28,6 +29,7 @@ const HeaderNav = ({
   rightContent,
   leftContent,
   showFilter = true,
+  showRightContent = true,
   breadcrumb = [],
 }: HeaderNavProps) => {
   return (
@@ -40,7 +42,7 @@ const HeaderNav = ({
               {/**Breadcrumb */}
               <Breadcrumb>
                 <BreadcrumbList>
-                {breadcrumb.map((item, index) => (
+                  {breadcrumb.map((item, index) => (
                     <div key={index} className="flex items-center">
                       <BreadcrumbItem>
                         {item.href ? (
@@ -51,9 +53,7 @@ const HeaderNav = ({
                           <BreadcrumbPage>{item.label}</BreadcrumbPage>
                         )}
                       </BreadcrumbItem>
-                      {index < breadcrumb.length - 1 && (
-                        <BreadcrumbSeparator />
-                      )}
+                      {index < breadcrumb.length - 1 && <BreadcrumbSeparator />}
                     </div>
                   ))}
                 </BreadcrumbList>
@@ -61,9 +61,11 @@ const HeaderNav = ({
             </div>
             {leftContent && <div className="md:hidden">{leftContent}</div>}
           </div>
-          <div className="flex items-center space-x-2.5 border-t border-border p-2.5 md:border-none">
-            {rightContent}
-          </div>
+          {showRightContent && (
+            <div className="flex items-center space-x-2.5 border-t border-border p-2.5 md:border-none">
+              {rightContent}
+            </div>
+          )}
         </div>
         <div className="hidden items-center md:flex">{leftContent}</div>
       </div>
