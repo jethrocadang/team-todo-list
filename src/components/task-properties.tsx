@@ -1,23 +1,27 @@
 "use client";
 
 import { Text } from "./text";
-import {
-  Loader,
-  Minus,
-  CircleUserRound,
-  Calendar,
-  Plus,
-  Circle,
-  Clock,
-  CircleCheckBig,
-} from "lucide-react";
+import { Loader, Minus, CircleUserRound, Calendar, Plus } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import TaskPropsSelect from "./task-props-select";
 import { selectPriorityItems, selectStatusItems } from "@/lib/task-properties";
+import { MultiSelect } from "./label-multi-select";
+import { useState } from "react";
 
 const TaskProperties = () => {
-
+  const frameworksList = [
+    { value: "react", label: "React" },
+    { value: "angular", label: "Angular" },
+    { value: "vue", label: "Vue" },
+    { value: "svelte", label: "Svelte" },
+    { value: "ember", label: "Ember" },
+  ];
+  const isLabelAvailable = false;
+  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([
+    "react",
+    "angular",
+  ]);
 
   return (
     <aside className="hidden w-full max-w-56 flex-shrink flex-col justify-start gap-6 border-l px-2.5 md:flex">
@@ -62,19 +66,34 @@ const TaskProperties = () => {
           Labels
         </Text>
         <div className="flex flex-shrink flex-wrap items-center gap-1.5">
-          <Badge variant={"outline"} className="gap-1.5 py-1">
-            <div className="h-2 w-2 rounded-full bg-green-500" /> Bug
-          </Badge>
-          <Badge variant={"outline"} className="gap-1.5 py-1">
-            <div className="h-2 w-2 rounded-full bg-green-500" /> Very Long text
-          </Badge>
-          <Badge variant={"outline"} className="gap-1.5 py-1">
-            <div className="h-2 w-2 rounded-full bg-green-500" /> Very Long text
-          </Badge>
+          {isLabelAvailable && (
+            <>
+              <Badge variant={"outline"} className="gap-1.5 py-1">
+                <div className="h-2 w-2 rounded-full bg-green-500" /> Bug
+              </Badge>
+              <Badge variant={"outline"} className="gap-1.5 py-1">
+                <div className="h-2 w-2 rounded-full bg-green-500" /> Very Long
+                text
+              </Badge>
+              <Badge variant={"outline"} className="gap-1.5 py-1">
+                <div className="h-2 w-2 rounded-full bg-green-500" /> Very Long
+                text
+              </Badge>
 
-          <Button variant={"ghost"} size={"icon"} className="h-7 w-7">
-            <Plus className="h-5 w-5 text-primary/70" />
-          </Button>
+              <Button variant={"ghost"} size={"icon"} className="h-7 w-7">
+                <Plus className="h-5 w-5 text-primary/70" />
+              </Button>
+            </>
+          )}
+          <MultiSelect
+            options={frameworksList}
+            onValueChange={setSelectedFrameworks}
+            defaultValue={selectedFrameworks}
+            placeholder="Add tag"
+            variant="inverted"
+            animation={2}
+            maxCount={3}
+          />
         </div>
       </div>
       <div>
