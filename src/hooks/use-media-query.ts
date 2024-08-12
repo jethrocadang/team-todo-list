@@ -1,22 +1,26 @@
 import { useState, useEffect } from 'react';
 
 const useMediaQuery = (query: string): boolean => {
-  // Initialize state based on media query
-  const [matches, setMatches] = useState<boolean>(window.matchMedia(query).matches);
+  // Initialize state to false since window is not defined during SSR
+  const [matches, setMatches] = useState<boolean>(false);
 
   useEffect(() => {
-    const mediaQueryList = window.matchMedia(query);
+    // Check if window is available (i.e., running in the browser)
+    if (typeof window !== 'undefined') {
+      const mediaQueryList = window.matchMedia(query);
+      setMatches(mediaQueryList.matches);
 
-    // Define callback to update state
-    const handleChange = (event: MediaQueryListEvent) => setMatches(event.matches);
+      // Define callback to update state
+      const handleChange = (event: MediaQueryListEvent) => setMatches(event.matches);
 
-    // Add event listener
-    mediaQueryList.addEventListener('change', handleChange);
+      // Add event listener
+      mediaQueryList.addEventListener('change', handleChange);
 
-    // Clean up event listener on unmount
-    return () => {
-      mediaQueryList.removeEventListener('change', handleChange);
-    };
+      // Clean up event listener on unmount
+      return () => {
+        mediaQueryList.removeEventListener('change', handleChange);
+      };
+    }
   }, [query]);
 
   return matches;
