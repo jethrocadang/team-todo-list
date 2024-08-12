@@ -1,7 +1,14 @@
 "use client";
 
 import { Text } from "./text";
-import { Loader, Minus, CircleUserRound, Calendar, Plus } from "lucide-react";
+import {
+  Loader,
+  Minus,
+  CircleUserRound,
+  Calendar,
+  Plus,
+  Bookmark,
+} from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import TaskPropsSelect from "./task-props-select";
@@ -32,7 +39,9 @@ const TaskProperties = () => {
           placeholder={
             <div className="flex items-center gap-2">
               <Loader className="h-4 w-4 text-primary/70" />
-              <Text size={"sm"} type={"md"}>Backlog</Text>
+              <Text size={"sm"} type={"md"}>
+                Backlog
+              </Text>
             </div>
           }
           selectItems={selectStatusItems}
@@ -42,7 +51,9 @@ const TaskProperties = () => {
           placeholder={
             <div className="flex items-center gap-2">
               <Minus className="h-4 w-4 text-primary/70" />
-              <Text size={"sm"} type={"md"} color={"muted"}>Set priority</Text>
+              <Text size={"sm"} type={"md"} color={"muted"}>
+                Set priority
+              </Text>
             </div>
           }
           selectItems={selectPriorityItems}
@@ -52,7 +63,9 @@ const TaskProperties = () => {
           placeholder={
             <div className="flex items-center gap-2">
               <CircleUserRound className="h-4 w-4 text-primary/70" />
-              <Text size={"sm"} type={"md"} color={"muted"}>Assign</Text>
+              <Text size={"sm"} type={"md"} color={"muted"}>
+                Assign
+              </Text>
             </div>
           }
           label="Assign to"
@@ -76,19 +89,43 @@ const TaskProperties = () => {
               text
             </Badge>
 
-            <Button variant={"ghost"} size={"icon"} className="h-6 w-6">
-              <Plus className="h-4 w-4 text-primary/70" />
-            </Button>
+            <MultiSelect
+              options={frameworksList}
+              onValueChange={setSelectedFrameworks}
+              defaultValue={selectedFrameworks}
+              placeholder={
+                <>
+                  <Plus className="h-4 w-4 text-primary/70" />
+                </>
+              }
+              variant="inverted"
+              animation={2}
+              maxCount={3}
+              className="rounded-full h-6 w-6 justify-center"
+              size={"icon"}
+              
+              
+            />
           </div>
         ) : (
           <MultiSelect
             options={frameworksList}
             onValueChange={setSelectedFrameworks}
             defaultValue={selectedFrameworks}
-            placeholder="Add tag"
+            placeholder={
+              <>
+                <Bookmark className="mr-2 h-4 w-4 text-primary/70" />
+                <span>
+                  <Text size={"sm"} type={"md"} color={"muted"}>
+                    Assign
+                  </Text>
+                </span>
+              </>
+            }
             variant="inverted"
             animation={2}
             maxCount={3}
+            
           />
         )}
       </div>

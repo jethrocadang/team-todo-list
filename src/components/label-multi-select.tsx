@@ -80,7 +80,7 @@ interface MultiSelectProps
    * Placeholder text to be displayed when no values are selected.
    * Optional, defaults to "Select options".
    */
-  placeholder?: string;
+  placeholder?: React.ReactNode;
 
   /**
    * Animation duration in seconds for the visual effects (e.g., bouncing badges).
@@ -112,6 +112,7 @@ interface MultiSelectProps
    * Optional, can be used to add custom styles.
    */
   className?: string;
+  size?: "default" | "xs" | "sm" | "lg" | "icon" | null | undefined;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -130,6 +131,7 @@ export const MultiSelect = React.forwardRef<
       modalPopover = false,
       asChild = false,
       className,
+      size,
       ...props
     },
     ref,
@@ -183,16 +185,11 @@ export const MultiSelect = React.forwardRef<
             ref={ref}
             {...props}
             onClick={handleTogglePopover}
-            size={isDesktop ? "sm" : "icon"}
             variant={isDesktop ? "ghost" : "outline"}
-            className="h-8 w-full justify-start"
+            size={size || "sm"}
+            className={cn("h-8 justify-start w-full", className)}
           >
-            <Bookmark className="mr-2 h-4 w-4 text-primary/70" />
-            <span className="hidden md:inline-block">
-              <Text size={"sm"} type={"md"} color={"muted"}>
-                {placeholder}
-              </Text>
-            </span>
+            {placeholder}
           </Button>
         </PopoverTrigger>
         <PopoverContent
