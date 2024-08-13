@@ -1,8 +1,7 @@
 // src/components/multi-select.tsx
 
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { Bookmark, BookmarkIcon, CheckIcon, ChevronDown } from "lucide-react";
+
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -18,42 +17,17 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from "@/components/ui/command";
 import { Checkbox } from "./ui/checkbox";
-import { Text } from "./text";
 import useMediaQuery from "@/hooks/use-media-query";
 
-/**
- * Variants for the multi-select component to handle different styles.
- * Uses class-variance-authority (cva) to define different styles based on "variant" prop.
- */
-const multiSelectVariants = cva(
-  "m-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-foreground/10 text-foreground bg-card hover:bg-card/80",
-        secondary:
-          "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        inverted: "inverted",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  },
-);
+
 
 /**
  * Props for MultiSelect component
  */
 interface MultiSelectProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof multiSelectVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * An array of option objects to be displayed in the multi-select component.
    * Each option object has a label, value, and an optional icon.
@@ -123,7 +97,6 @@ export const MultiSelect = React.forwardRef<
     {
       options,
       onValueChange,
-      variant,
       defaultValue = [],
       placeholder = "Select options",
       animation = 0,
@@ -139,7 +112,7 @@ export const MultiSelect = React.forwardRef<
     const [selectedValues, setSelectedValues] =
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
-    const [isAnimating, setIsAnimating] = React.useState(false);
+    const [inputValue, setInputValue] = React.useState("")
 
     React.useEffect(() => {
       if (JSON.stringify(selectedValues) !== JSON.stringify(defaultValue)) {
@@ -172,6 +145,10 @@ export const MultiSelect = React.forwardRef<
       setIsPopoverOpen((prev) => !prev);
     };
 
+    const handleInputChange = (value:string) => {
+      setInputValue(value)
+    }
+
     const isDesktop = useMediaQuery("(min-width: 768px)");
 
     return (
@@ -195,16 +172,17 @@ export const MultiSelect = React.forwardRef<
         <PopoverContent
           className="w-auto p-0"
           align="start"
-          side="left"
+          side={isDesktop ? "left" : "bottom"}
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
           <Command>
             <CommandInput
               placeholder="Add new tag..."
               onKeyDown={handleInputKeyDown}
+              onValueChange={handleInputChange}
             />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>New Tag: &quot;{inputValue}&quot;	</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => {
                   const isSelected = selectedValues.includes(option.value);
