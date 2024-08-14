@@ -21,6 +21,7 @@ import {
 import { Text } from "@/components/text";
 import { MultiSelect } from "@/components/label-multi-select";
 import { useState } from "react";
+import TagColorDialog from "@/components/tag-color-pick";
 
 export default function TaskPage() {
 
@@ -67,33 +68,9 @@ export default function TaskPage() {
                   variant="outline"
                   size={"xs"}
                 />
-                <TaskPropsSelect
-                  placeholder={
-                    <div className="flex items-center gap-1 md:gap-2.5">
-                      <CircleUserRound className="h-4 w-4 text-primary/70" />
-                      <Text size={"xs"} type={"normal"}>
-                        Assign
-                      </Text>
-                    </div>
-                  }
-                  label="Change status"
-                  selectItems={selectPriorityItems}
-                  variant="outline"
-                  size={"xs"}
-                />
-                <MultiSelect
-                  options={frameworksList}
-                  onValueChange={setSelectedFrameworks}
-                  defaultValue={selectedFrameworks}
-                  placeholder={
-                    <div className="flex items-center gap-1 md:gap-2.5">
-                    <Bookmark className="h-4 w-4 text-primary/70" />
-                  
-                  </div>
-                  }
-                  animation={2}
-                  maxCount={3}
-                />
+      
+                  <TagColorDialog/>
+        
               </div>
             }
           />
