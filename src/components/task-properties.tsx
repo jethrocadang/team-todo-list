@@ -10,14 +10,13 @@ import {
   Bookmark,
 } from "lucide-react";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 import TaskPropsSelect from "./task-props-select";
 import {
   frameworksList,
   selectPriorityItems,
   selectStatusItems,
 } from "@/lib/task-properties";
-import { MultiSelect } from "./label-multi-select";
+import { TagMultiSelect } from "./label-multi-select";
 import { useState } from "react";
 
 const TaskProperties = () => {
@@ -89,7 +88,7 @@ const TaskProperties = () => {
               text
             </Badge>
 
-            <MultiSelect
+            <TagMultiSelect
               options={frameworksList}
               onValueChange={setSelectedFrameworks}
               defaultValue={selectedFrameworks}
@@ -98,7 +97,6 @@ const TaskProperties = () => {
                   <Plus className="h-4 w-4 text-primary/70" />
                 </>
               }
-              variant="inverted"
               animation={2}
               maxCount={3}
               className="rounded-full h-6 w-6 justify-center"
@@ -108,7 +106,7 @@ const TaskProperties = () => {
             />
           </div>
         ) : (
-          <MultiSelect
+          <TagMultiSelect
             options={frameworksList}
             onValueChange={setSelectedFrameworks}
             defaultValue={selectedFrameworks}
@@ -122,7 +120,6 @@ const TaskProperties = () => {
                 </span>
               </>
             }
-            variant="inverted"
             animation={2}
             maxCount={3}
             

@@ -19,7 +19,6 @@ import {
   selectStatusItems,
 } from "@/lib/task-properties";
 import { Text } from "@/components/text";
-import { MultiSelect } from "@/components/label-multi-select";
 import { useState } from "react";
 import TagColorDialog from "@/components/tag-color-pick";
 

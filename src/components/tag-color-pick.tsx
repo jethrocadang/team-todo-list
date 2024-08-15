@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
 import {
   Command,
@@ -13,7 +12,13 @@ import {
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { Badge } from "./ui/badge";
 
-const TagColorDialog = () => {
+const TagColorDialog = ({
+  open,
+  setOpen,
+}: {
+  open?: boolean;
+  setOpen?: ((open: boolean) => void) | undefined;
+}) => {
   const options = [
     { color: "bg-green-400", tag: "Green" },
     { color: "bg-red-400", tag: "Red" },
@@ -33,16 +38,19 @@ const TagColorDialog = () => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Trigger</Button>
+        <Button className="hidden">Trigger</Button>
       </DialogTrigger>
       <DialogContent>
         <Command className="p-2.5">
           <Badge variant={"secondary"} className="w-fit rounded-md font-normal">
             TID-01 - Title
           </Badge>
-          <CommandInput className="py-5 text-lg" placeholder="Select a color for tag ..."  />
+          <CommandInput
+            className="py-5 text-lg"
+            placeholder="Select a color for tag ..."
+          />
           <CommandList>
             <CommandEmpty>No tags found</CommandEmpty>
             <CommandGroup className="space-y-2.5">
@@ -51,7 +59,7 @@ const TagColorDialog = () => {
                 return (
                   <CommandItem
                     key={option.tag}
-                    className="p-2.5 px-3 "
+                    className="p-2.5 px-3"
                     onClick={() => handleSelect(option.tag)}
                   >
                     <div

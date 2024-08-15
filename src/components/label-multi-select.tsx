@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/command";
 import { Checkbox } from "./ui/checkbox";
 import useMediaQuery from "@/hooks/use-media-query";
+import TagColorDialog from "./tag-color-pick";
 
 
 
@@ -89,7 +90,7 @@ interface MultiSelectProps
   size?: "default" | "xs" | "sm" | "lg" | "icon" | null | undefined;
 }
 
-export const MultiSelect = React.forwardRef<
+export const TagMultiSelect = React.forwardRef<
   HTMLButtonElement,
   MultiSelectProps
 >(
@@ -113,6 +114,9 @@ export const MultiSelect = React.forwardRef<
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [inputValue, setInputValue] = React.useState("")
+    const [newLabel, setNewLabel] = React.useState(""); // State to hold the new label being added
+    const [isDialogOpen, setIsDialogOpen] = React.useState(false); // State to manage dialog visibility
+
 
     React.useEffect(() => {
       if (JSON.stringify(selectedValues) !== JSON.stringify(defaultValue)) {
@@ -123,7 +127,19 @@ export const MultiSelect = React.forwardRef<
     const handleInputKeyDown = (
       event: React.KeyboardEvent<HTMLInputElement>,
     ) => {
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && inputValue.trim()) {
+        // Check if the input value matches any existing option
+        const doesMatch = options.some(option =>
+          option.label.toLowerCase() === inputValue.trim().toLowerCase()
+        );
+
+        if (!doesMatch) {
+          setNewLabel(inputValue.trim()); // Set the new label
+          setIsDialogOpen(true); // Open the dialog
+        } else {
+          // Optionally, you could display a message or just do nothing
+          console.log("Label already exists");
+        }
         setIsPopoverOpen(true);
       } else if (event.key === "Backspace" && !event.currentTarget.value) {
         const newSelectedValues = [...selectedValues];
@@ -152,6 +168,8 @@ export const MultiSelect = React.forwardRef<
     const isDesktop = useMediaQuery("(min-width: 768px)");
 
     return (
+      <>
+      
       <Popover
         open={isPopoverOpen}
         onOpenChange={setIsPopoverOpen}
@@ -204,8 +222,13 @@ export const MultiSelect = React.forwardRef<
           </Command>
         </PopoverContent>
       </Popover>
+
+      <TagColorDialog open={isDialogOpen} setOpen={setIsDialogOpen}/>
+      </>
+
+
     );
   },
 );
 
-MultiSelect.displayName = "MultiSelect";
+TagMultiSelect.displayName = "TagMultiSelect";
