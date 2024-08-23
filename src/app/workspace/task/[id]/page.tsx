@@ -34,7 +34,6 @@ export default function TaskPage() {
       <div className="flex h-full w-full flex-row">
         <div className="w-full">
           <HeaderNav
-            showFilter={false}
             showRightContent={true}
             breadcrumb={[{ label: "My tasks", href: "/" }, { label: "Id-01" }]}
             rightContent={

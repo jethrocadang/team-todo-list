@@ -30,7 +30,6 @@ export default function MyTasksPage() {
             </Button>
           </>
         }
-        showFilter={false}
       />
       <FilterBar variant="secondary" title="Filter" titleIcon={ListFilter} rightIcon={PlusIcon}/>
       <TaskBar />

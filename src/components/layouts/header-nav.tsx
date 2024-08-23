@@ -20,7 +20,6 @@ interface BreadcrumbItem {
 interface HeaderNavProps {
   rightContent?: React.ReactNode;
   leftContent?: React.ReactNode;
-  showFilter?: boolean;
   showRightContent?: boolean;
   breadcrumb?: BreadcrumbItem[];
 }
@@ -28,7 +27,6 @@ interface HeaderNavProps {
 const HeaderNav = ({
   rightContent,
   leftContent,
-  showFilter = true,
   showRightContent = true,
   breadcrumb = [],
 }: HeaderNavProps) => {
@@ -69,12 +67,6 @@ const HeaderNav = ({
         </div>
         <div className="hidden items-center md:flex">{leftContent}</div>
       </div>
-      {showFilter && (
-        <div className="flex items-center border-b border-border p-2.5">
-          <ListFilter className="mr-2 inline-flex h-5 w-5 text-primary/70" />
-          <Text>Filter</Text>
-        </div>
-      )}
     </>
   );
 };
