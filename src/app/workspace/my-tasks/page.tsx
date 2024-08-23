@@ -1,8 +1,11 @@
+"use client"
+
 import Container from "@/components/container";
+import FilterBar from "@/components/layouts/filter-bar";
 import Headernav from "@/components/layouts/header-nav";
 import TaskBar from "@/components/task-bar";
 import { Button } from "@/components/ui/button";
-import { PanelRightOpen } from "lucide-react";
+import { ListFilter, PanelRightOpen, PlusIcon } from "lucide-react";
 
 export default function MyTasksPage() {
   return (
@@ -27,7 +30,9 @@ export default function MyTasksPage() {
             </Button>
           </>
         }
+        showFilter={false}
       />
+      <FilterBar variant="secondary" title="Filter" titleIcon={ListFilter} rightIcon={PlusIcon}/>
       <TaskBar />
     </Container>
   );
