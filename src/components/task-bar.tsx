@@ -6,11 +6,11 @@ import { Text } from "./text";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
+import Link from "next/link";
 
 const TaskBar = () => {
   return (
-    <div className="flex items-center justify-between border-b border-border p-2.5">
+    <Link href={"/workspace/task/id"} className="flex items-center justify-between border-b border-border p-2.5">
       <div className="flex items-center gap-2.5">
         <Checkbox />
         <Minus />
@@ -36,7 +36,7 @@ const TaskBar = () => {
           </AvatarFallback>
         </Avatar>
       </div>
-    </div>
+    </Link>
   );
 };
 
